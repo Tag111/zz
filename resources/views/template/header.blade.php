@@ -27,6 +27,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+                @include('elements.footer.language-switcher')
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::currentRouteName() !== 'profile')

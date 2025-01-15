@@ -14,6 +14,9 @@ use App\Http\Controllers\PaymentsController;
 */
 
 // Admin routes ( Needs to be placed above )
+// web.php
+Route::post('/fedapay/logs', [PaymentsController::class, 'logFedaPayData'])->name('fedapay.logs');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => 'jsVars'], function () {
     Voyager::routes();

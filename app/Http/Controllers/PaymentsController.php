@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Stripe\StripeClient;
 use Yabacon\Paystack;
-
+use FedaPay\FedaPay;
 class PaymentsController extends Controller
 {
     protected $paymentHandler;
@@ -252,10 +252,19 @@ class PaymentsController extends Controller
         return $this->paymentHandler->redirectByTransaction($transaction);
     }
 
+    public function logFedaPayData(Request $request)
+    {
+        $data = $request->all();
+        Log::info('FedaPay Debug Data:', $data);
+
+        return response()->json(['status' => 'logged'], 200);
+    }
+
+
     public function success(User $user)
     {
-        \FedaPay\FedaPay::setApiKey(config('feda.fedapay_secret_key'));
-        \FedaPay\FedaPay::setEnvironment('sandbox');
+        FedaPay::setApiKey(config('feda.fedapay_secret_key'));
+        FedaPay::setEnvironment(env('FEDAPAY_ENVIRONMENT', ''));
 
         try {
             $transactionId = request()->get('transaction_id');
@@ -269,16 +278,18 @@ class PaymentsController extends Controller
                     'amount' => $transaction->amount,
                     'payment_id' => $transaction->id
                 ]);
-                
 
                 return redirect()->route('profile', $user->username)
                     ->with('success', 'Abonnement activé avec succès!');
             }
 
-            return redirect()->back()->with('error', 'Échec du paiement');
+            return redirect()->back()
+                ->with('error', 'Échec du paiement');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erreur de vérification du paiement');
+            \Log::error('Erreur de paiement FedaPay: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Erreur de vérification du paiement');
         }
     }
     /**

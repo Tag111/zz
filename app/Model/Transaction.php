@@ -37,8 +37,8 @@ class Transaction extends Model
     public const MERCADO_PROVIDER = 'mercado';
     public const COINBASE_API_BASE_PATH = 'https://api.commerce.coinbase.com';
     public const NOWPAYMENTS_API_BASE_PATH = 'https://api.nowpayments.io/v1/';
-    public const FEDAPAY_API_BASE_PATH = 'https://cdn.fedapay.com/checkout.js?v=1.1.7';
-    public const FEDAPAY_PROVIDER = 'fedapay'; // Ajout de FedaPay
+    //public const FEDAPAY_API_BASE_PATH = 'https://cdn.fedapay.com/checkout.js?v=1.1.7';
+    //public const FEDAPAY_PROVIDER = 'fedapay'; // Ajout de FedaPay
     public const ALLOWED_PAYMENT_PROVIDERS = [
         self::NOWPAYMENTS_PROVIDER,
         self::COINBASE_PROVIDER,
@@ -48,14 +48,14 @@ class Transaction extends Model
         self::PAYSTACK_PROVIDER,
         self::OXXO_PROVIDER,
         self::MERCADO_PROVIDER,
-        self::FEDAPAY_PROVIDER, // Ajout de FedaPay
+        //self::FEDAPAY_PROVIDER, // Ajout de FedaPay
     ];
     public const PENDING_PAYMENT_PROCESSORS = [
         self::COINBASE_PROVIDER,
         self::NOWPAYMENTS_PROVIDER,
         self::CCBILL_PROVIDER,
         self::OXXO_PROVIDER,
-        self::FEDAPAY_PROVIDER, // Ajout de FedaPay
+        //self::FEDAPAY_PROVIDER, // Ajout de FedaPay
     ];
     public const CCBILL_FLEX_FORM_BASE_PATH = 'https://api.ccbill.com/wap-frontflex/flexforms/';
     public const CCBILL_CANCEL_SUBSCRIPTION_BASE_PATH = 'https://datalink.ccbill.com/utils/subscriptionManagement.cgi';

@@ -149,7 +149,7 @@ abstract class BaseProvider implements Countable
     /**
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return count($this->files);
     }
@@ -157,7 +157,6 @@ abstract class BaseProvider implements Countable
     /**
      * @throws \Devfactory\Minify\Exceptions\FileNotExistException
      */
-
     protected function appendFiles()
     {
         foreach ($this->files as $file) {

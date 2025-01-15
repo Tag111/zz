@@ -235,7 +235,7 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public static function getAppCurrencyCode()
     {
-        $symbol = 'FCFA';
+        $symbol = '$';
         if (getSetting('payments.currency_code') != null && !empty(getSetting('payments.currency_code'))) {
             $symbol = getSetting('payments.currency_code');
         }
